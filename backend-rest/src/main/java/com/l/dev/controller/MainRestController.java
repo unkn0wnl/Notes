@@ -4,6 +4,8 @@ import com.l.dev.entity.model.User;
 import com.l.dev.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +23,12 @@ public class MainRestController {
     @RequestMapping(path = "getAll", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<User> getAllUsers() {
         return userService.findAll();
+    }
+
+    @RequestMapping(path = "/users/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUserById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

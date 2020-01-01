@@ -14,6 +14,17 @@ public class SimpleRestUserService implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public SimpleRestUserService() {
+    }
+
+    public User getUserByUsername(String username) {
+        return null;
+    }
+
+    public void deleteUserById(Long id) {
+        userRepository.delete(id);
+    }
+
     @Override
     public List<User> findAll() {
         return userRepository.findAll();

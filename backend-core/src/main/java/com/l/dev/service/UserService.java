@@ -7,5 +7,7 @@ import java.util.List;
 
 @Service
 public interface UserService {
+    void deleteUserById(Long id);
+
     List<User> findAll();
 }
