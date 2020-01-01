@@ -6,6 +6,7 @@ class ListUserComponent extends Component {
         super(props);
         this.state = {
             users: [],
+            message: null,
             page: 1
         };
         // this.refreshUsers = this.refreshUsers().bind(this);
@@ -25,11 +26,20 @@ class ListUserComponent extends Component {
                 )
     }
 
+    deleteUser(id) {
+        UserDataService.deleteUser(id)
+                .then(response => {
+                    this.setState({message: 'User was successfully deleted.'});
+                    this.refreshUsers();
+                })
+    }
+
     render() {
         console.log(this.state.users);
         return (
                 <div className="container">
                     <h3>All Users</h3>
+                    {this.state.message && <div class="alert alert-success">{this.state.message}</div>}
                     <div className="container">
                         <table className="table">
                             <thead>
@@ -42,10 +52,14 @@ class ListUserComponent extends Component {
                             <tbody>
                             {
                                 this.state.users.map(
-                                        user => <tr  key={user.id}>
+                                        user => <tr key={user.id}>
                                             <td>{user.id}</td>
                                             <td>{user.name}</td>
                                             <td>{user.email}</td>
+                                            <td>
+                                                <button className="btn btn-warning"
+                                                        onClick={() => this.deleteUser(user.id)}>Delete</button>
+                                            </td>
                                         </tr>
                                 )
                             }
