@@ -6,8 +6,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
                              http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
-    <context:component-scan base-package="com.l.dev"/>
-    <jpa:repositories base-package="com.l.dev.repository" entity-manager-factory-ref="factoryBean"/>
+    <context:component-scan base-package="com.unkn0wnl.dev.notes.core"/>
+    <jpa:repositories base-package="com.unkn0wnl.dev.notes.core.repository" entity-manager-factory-ref="factoryBean"/>
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${db.driver}"/>
         <property name="url" value="${db.ulr}"/>
@@ -18,7 +18,7 @@
           class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
     <bean id="factoryBean" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="com.l.dev"/>
+        <property name="packagesToScan" value="com.unkn0wnl.dev.notes.core"/>
         <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>
         <property name="jpaProperties">
             <props>

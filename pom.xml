@@ -4,15 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>Spring4-REST-ReactJS-View</name>
-    <groupId>com.l.dev</groupId>
-    <artifactId>Spring4ReactJS-parent</artifactId>
+    <name>Notes</name>
+    <groupId>com.unkn0wnl.dev.notes</groupId>
+    <artifactId>notes-parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
 
     <modules>
         <module>backend-core</module>
-        <module>backend-rest</module>
+        <module>backend-api</module>
         <module>frontend</module>
     </modules>
 
@@ -232,7 +232,7 @@
     </dependencyManagement>
 
     <build>
-        <finalName>Spring4ReactJS-BACKEND[CORE+REST]</finalName>
+        <finalName>Notes-backend(core+rest)</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

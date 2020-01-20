@@ -3,15 +3,15 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>Spring4ReactJS-parent</artifactId>
-        <groupId>com.l.dev</groupId>
+        <groupId>com.unkn0wnl.dev.notes</groupId>
+        <artifactId>notes-parent</artifactId>
         <version>1.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.l.dev</groupId>
+    <groupId>com.unkn0wnl.dev.notes.core</groupId>
     <artifactId>backend-core</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
