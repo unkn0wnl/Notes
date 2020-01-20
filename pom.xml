@@ -247,7 +247,7 @@
     </dependencyManagement>
 
     <build>
-        <finalName>Notes-backend(core+rest)</finalName>
+        <finalName>notes-backend(core+rest)</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -277,5 +277,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
