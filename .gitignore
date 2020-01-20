@@ -36,8 +36,8 @@ yarn-error.log*
 */target/**
 
 */node_modules
-/backend-rest/src/main/resources/config/db.properties
-/backend-rest/src/main/resources/config/rest.properties
+**/db.properties
+**/rest.properties
 
 # misc
 yarn-error.lo
