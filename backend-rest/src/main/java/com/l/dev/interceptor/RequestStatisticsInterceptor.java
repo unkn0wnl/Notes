@@ -22,8 +22,13 @@ public class RequestStatisticsInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        LOGGER.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         LOGGER.info("Method: " + request.getMethod());
         LOGGER.info("Path: " + request.getRequestURI());
+        LOGGER.info("Accept: " + request.getHeader("accept"));
+        LOGGER.info("Authorization: " + request.getHeader("authorization"));
+        LOGGER.info("User-agent: " + request.getHeader("user-agent"));
+        LOGGER.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         return super.preHandle(request, response, handler);
     }
 }
