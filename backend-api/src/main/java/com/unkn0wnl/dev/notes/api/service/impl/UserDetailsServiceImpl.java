@@ -4,13 +4,16 @@ import com.unkn0wnl.dev.notes.api.security.principal.UserPrincipal;
 import com.unkn0wnl.dev.notes.core.entity.model.User;
 import com.unkn0wnl.dev.notes.core.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -29,15 +32,26 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .orElseThrow(
                         () -> new UsernameNotFoundException("User not found with username or email : " + usernameOrEmail)
                 );
-        return new UserPrincipal(user.getId(), user.getName(), user.getUsername(), user.getEmail(), user.getPassword(), new HashSet<>());
+        Set<GrantedAuthority> authorities = this.collectUserRoles(user);
+        return new UserPrincipal(user.getId(), user.getName(), user.getUsername(), user.getEmail(), user.getPassword(), authorities);
     }
 
     @Transactional
-    public UserDetails loadUserById(Long id) {
+    public UserDetails loadUserById(Long id) throws Exception {
         User user = userRepository.findUserById(id)
                 .orElseThrow(
                         () -> new UsernameNotFoundException(String.format("User with id %d not found!", id))
                 );
-        return new UserPrincipal(user.getId(), user.getName(), user.getUsername(), user.getEmail(), user.getName(), new HashSet<>());
+        Set<GrantedAuthority> authorities = this.collectUserRoles(user);
+        return new UserPrincipal(user.getId(), user.getName(), user.getUsername(), user.getEmail(), user.getName(), authorities);
+    }
+
+    private Set<GrantedAuthority> collectUserRoles(User user) {
+        return user
+                .getRoles()
+                .stream()
+                .map(role ->
+                        new SimpleGrantedAuthority(role.getName().name())
+                ).collect(Collectors.toSet());
     }
 }
