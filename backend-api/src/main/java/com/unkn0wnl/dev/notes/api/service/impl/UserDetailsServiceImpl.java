@@ -37,7 +37,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Transactional
-    public UserDetails loadUserById(Long id) throws Exception {
+    public UserDetails loadUserById(Long id) {
         User user = userRepository.findUserById(id)
                 .orElseThrow(
                         () -> new UsernameNotFoundException(String.format("User with id %d not found!", id))
