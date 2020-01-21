@@ -11,7 +11,7 @@
     <Loggers>
         <Root level="info" additivity="false">
             <AppenderRef ref="consoleAppender"/>
-            <AppenderRef ref="fileJsonAppender"/>
+<!--            <AppenderRef ref="fileJsonAppender"/>-->
         </Root>
     </Loggers>
 </Configuration>
