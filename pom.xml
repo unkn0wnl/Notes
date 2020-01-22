@@ -228,6 +228,12 @@
                 <version>${mockito-junit-jupiter.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>LATEST</version>
+                <scope>test</scope>
+            </dependency>
 
 
             <dependency>
