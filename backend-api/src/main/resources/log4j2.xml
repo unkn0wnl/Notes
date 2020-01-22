@@ -4,14 +4,13 @@
         <Console name="consoleAppender" target="SYSTEM_OUT">
             <PatternLayout pattern="[%-4level] [%d{yyyy-MM-dd HH:mm:ss.SSS}]  %-4L %-40c{1} %msg%n"/>
         </Console>
-        <File name="fileJsonAppender" fileName="./logs/current_state_log.json">
+<!--        <File name="fileJsonAppender" fileName="./logs/current_state_log.json">
             <JsonLayout compact="true" eventEol="true" properties="false" stacktraceAsString="true"/>
-        </File>
+        </File>-->
     </Appenders>
     <Loggers>
         <Root level="info" additivity="false">
             <AppenderRef ref="consoleAppender"/>
-<!--            <AppenderRef ref="fileJsonAppender"/>-->
         </Root>
     </Loggers>
 </Configuration>
