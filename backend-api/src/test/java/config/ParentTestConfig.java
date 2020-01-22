@@ -1,4 +1,4 @@
-package testconfig;
+package config;
 
 import com.unkn0wnl.dev.notes.api.config.security.RestWebSecurityConfig;
 import org.springframework.context.annotation.Bean;
@@ -62,9 +62,9 @@ public class ParentTestConfig {
     @Bean
     public DataSourceInitializer dataSourceInitializer() {
         ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
-        resourceDatabasePopulator.addScript(new ClassPathResource("sql/rest_public_role.sql"));
-        resourceDatabasePopulator.addScript(new ClassPathResource("sql/rest_public_user_entity.sql"));
-        resourceDatabasePopulator.addScript(new ClassPathResource("sql/rest_public_user_roles.sql"));
+        resourceDatabasePopulator.addScript(new ClassPathResource("scripts/sql/rest_public_role.sql"));
+        resourceDatabasePopulator.addScript(new ClassPathResource("scripts/sql/rest_public_user_entity.sql"));
+        resourceDatabasePopulator.addScript(new ClassPathResource("scripts/sql/rest_public_user_roles.sql"));
 
         DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
         dataSourceInitializer.setDataSource(dataSource());
