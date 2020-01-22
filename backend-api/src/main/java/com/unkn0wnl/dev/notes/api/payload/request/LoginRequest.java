@@ -1,7 +1,7 @@
 package com.unkn0wnl.dev.notes.api.payload.request;
 
-import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {
 
