@@ -17,6 +17,14 @@ public class Note extends DateAudit {
     @NotBlank
     private String text;
 
+    @ManyToOne(
+            fetch = FetchType.EAGER, cascade = {
+            CascadeType.MERGE,
+            CascadeType.PERSIST
+    })
+    @JoinColumn(name = "user_id", nullable = false)
+    private User author;
+
     public Note() {
         super();
     }
