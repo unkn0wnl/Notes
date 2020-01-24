@@ -45,6 +45,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
         } catch (Exception ex) {
+            SecurityContextHolder.clearContext();
             LOGGER.error("Cloud not set user authentication in security context", ex);
         }
         filterChain.doFilter(httpServletRequest, httpServletResponse);
