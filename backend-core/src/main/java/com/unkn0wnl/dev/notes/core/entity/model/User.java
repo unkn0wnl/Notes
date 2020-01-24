@@ -6,7 +6,9 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -53,8 +55,12 @@ public class User extends DateAudit {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Note> notes;
+
     {
         roles = new HashSet<>();
+        notes = new ArrayList<>();
     }
 
     public User() {
@@ -116,6 +122,14 @@ public class User extends DateAudit {
         this.roles = roles;
     }
 
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -125,6 +139,7 @@ public class User extends DateAudit {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
+                ", notes=" + notes +
                 '}';
     }
 }
