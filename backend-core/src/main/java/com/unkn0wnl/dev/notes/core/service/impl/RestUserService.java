@@ -6,13 +6,22 @@ import com.unkn0wnl.dev.notes.core.entity.model.User;
 import com.unkn0wnl.dev.notes.core.repository.RoleRepository;
 import com.unkn0wnl.dev.notes.core.repository.UserRepository;
 import com.unkn0wnl.dev.notes.core.service.UserService;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
+import static org.apache.logging.log4j.LogManager.getLogger;
+
 @Service
 public class RestUserService implements UserService {
+
+    private static final Logger LOGGER;
+
+    static {
+        LOGGER = getLogger(RestUserService.class);
+    }
 
     private UserRepository userRepository;
     private RoleRepository roleRepository;
@@ -32,9 +41,26 @@ public class RestUserService implements UserService {
         User newUser = new User(name, username, email, hashedPassword);
 
         Role userRole = roleRepository.findByName(RoleEnum.ROLE_USER)
-                .orElseThrow(()-> new RuntimeException("User Role not set."));
+                .orElseThrow(() -> new RuntimeException("User Role not set."));
         newUser.setRoles(Collections.singleton(userRole));
 
         userRepository.save(newUser);
     }
+
+    @Override
+    public boolean checkUserAvailability(String checkBy, String value) {
+        boolean result = true;
+        String normalizedCheckBy = checkBy.trim().toLowerCase();
+
+        if (normalizedCheckBy.equals("username")) {
+            userRepository.existsByUsername(value);
+        } else if (normalizedCheckBy.equals("email")) {
+            userRepository.existsByEmail(value);
+        } else {
+            result = false;
+        }
+
+        return result;
+    }
+
 }
