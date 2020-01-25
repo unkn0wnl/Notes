@@ -7,4 +7,6 @@ public interface UserService {
 
     void registerNewUser(String name, String username, String email, String hashedPassword);
 
+    boolean checkUserAvailability(String checkBy, String value);
+
 }
