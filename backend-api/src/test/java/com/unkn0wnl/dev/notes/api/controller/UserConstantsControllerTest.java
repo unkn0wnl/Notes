@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 @WebAppConfiguration
 @ContextConfiguration("classpath:config/applicationContext-testConfig.xml")
-public class UserControllerTest extends WebIntegrationTestConfigurer {
+public class UserConstantsControllerTest extends WebIntegrationTestConfigurer {
 
     @Test
     @WithMockUser(roles = "USER")
