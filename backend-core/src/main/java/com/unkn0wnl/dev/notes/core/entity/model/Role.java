@@ -1,5 +1,6 @@
 package com.unkn0wnl.dev.notes.core.entity.model;
 
+import com.unkn0wnl.dev.notes.core.entity.model.EntityConstantsHolder.RoleConstants;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -9,7 +10,6 @@ import java.io.Serializable;
 @Table(name = "role", schema = "public")
 public class Role implements Serializable {
 
-    public static final int ROLE_NAME_LENGTH = 20;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class Role implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @NaturalId
-    @Column(length = ROLE_NAME_LENGTH)
+    @Column(length = RoleConstants.ROLE_NAME_LENGTH)
     private RoleEnum name;
 
     public Role() {

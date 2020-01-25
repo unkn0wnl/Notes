@@ -1,5 +1,6 @@
 package com.unkn0wnl.dev.notes.core.entity.model;
 
+import com.unkn0wnl.dev.notes.core.entity.model.EntityConstantsHolder.UserConstants;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -22,31 +23,26 @@ import java.util.Set;
 })
 public class User extends DateAudit {
 
-    public static final int MAX_NAME_LENGTH = 40;
-    public static final int MAX_EMAIL_LENGTH = 40;
-    public static final int MAX_USERNAME_LENGTH = 15;
-    public static final int MAX_PASSWORD_LENGTH = 100;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    @Size(max = MAX_NAME_LENGTH)
+    @Size(max = UserConstants.MAX_NAME_LENGTH)
     private String name;
 
     @NotBlank
-    @Size(max = MAX_USERNAME_LENGTH)
+    @Size(max = UserConstants.MAX_USERNAME_LENGTH)
     private String username;
 
     @NaturalId
     @NotBlank
-    @Size(max = MAX_EMAIL_LENGTH)
+    @Size(max = UserConstants.MAX_EMAIL_LENGTH)
     @Email
     private String email;
 
     @NotBlank
-    @Size(max = MAX_PASSWORD_LENGTH)
+    @Size(max = UserConstants.MAX_PASSWORD_LENGTH)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
