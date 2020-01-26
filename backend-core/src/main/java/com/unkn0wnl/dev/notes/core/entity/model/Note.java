@@ -22,7 +22,8 @@ public class Note extends DateAudit {
             cascade = {
                     CascadeType.MERGE,
                     CascadeType.PERSIST
-            })
+            }
+    )
     @JoinColumn(name = "user_id", nullable = false)
     private User author;
 
@@ -33,6 +34,14 @@ public class Note extends DateAudit {
     public Note(String heading, String text) {
         this.heading = heading;
         this.text = text;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getHeading() {
@@ -49,6 +58,14 @@ public class Note extends DateAudit {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
 }
