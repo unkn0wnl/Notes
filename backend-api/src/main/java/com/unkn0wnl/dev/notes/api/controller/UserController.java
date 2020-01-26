@@ -1,5 +1,6 @@
 package com.unkn0wnl.dev.notes.api.controller;
 
+import com.unkn0wnl.dev.notes.api.exception.BadRequestException;
 import com.unkn0wnl.dev.notes.core.service.UserService;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class UserController {
             isAvailable = !userService.checkUserAvailability(type, value);
         } catch (IllegalArgumentException ex) {
             LOGGER.warn(ex);
-            return ResponseEntity.badRequest().build();
+            throw new BadRequestException(ex);
         }
 
         return ResponseEntity.ok(new Properties() {
