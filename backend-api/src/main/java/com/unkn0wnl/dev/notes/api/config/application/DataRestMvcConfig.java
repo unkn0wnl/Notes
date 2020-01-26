@@ -7,7 +7,7 @@ import org.springframework.data.rest.webmvc.BaseUri;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 
 @Configuration
-public class RestJpaServiceApplicationContextConfig extends RepositoryRestMvcConfiguration {
+public class DataRestMvcConfig extends RepositoryRestMvcConfiguration {
 
     @Value("${app.base_path}")
     private String basePath;
