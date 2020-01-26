@@ -67,6 +67,8 @@ public class RestWebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                 .antMatchers("/api/auth/**")
                     .permitAll()
+                .antMatchers(HttpMethod.GET,"/api/user/isAvailable")
+                    .permitAll()
                 .antMatchers(HttpMethod.GET, "/api/users/**")
                     .permitAll()
                 .anyRequest()
