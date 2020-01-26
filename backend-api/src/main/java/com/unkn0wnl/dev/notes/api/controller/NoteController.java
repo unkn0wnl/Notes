@@ -39,8 +39,8 @@ public class NoteController {
 
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/notes", method = RequestMethod.POST)
-    public ResponseEntity<?> createNote(@Valid @RequestAttribute NoteRequest noteRequest) {
-        Note savedNote = noteService.saveNote(noteRequest.getHeading(), noteRequest.getText());
+    public ResponseEntity<?> createNote(@Valid @RequestBody NoteRequest noteRequest, @AuthenticationPrincipal UserDetails userDetails) {
+        Note savedNote = noteService.saveNote(noteRequest.getHeading(), noteRequest.getText(), userDetails.getUsername());
         URI savedNoteLocation = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{newNoteId}")
