@@ -1,6 +1,7 @@
 package com.unkn0wnl.dev.notes.api.controller;
 
 import com.unkn0wnl.dev.notes.core.service.UserService;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -8,10 +9,20 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Properties;
+
+import static org.apache.logging.log4j.LogManager.getLogger;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class UserController {
+
+    private static final Logger LOGGER;
+
+    static {
+        LOGGER = getLogger(UserController.class);
+    }
 
     private UserService userService;
 
@@ -26,10 +37,23 @@ public class UserController {
         return currentUser;
     }
 
-    @RequestMapping(value = "/user/isAvailable")
+    @RequestMapping(value = "/user/isAvailable", method = RequestMethod.GET)
     public ResponseEntity<?> checkUserAvailability(@RequestParam String type, @RequestParam String value) {
-        Boolean isAvailable = userService.checkUserAvailability(type, value);
-        return ResponseEntity.ok(isAvailable);
+        LOGGER.debug("Type: {}\nValue: {}", type, value);
+        Boolean isAvailable;
+
+        try {
+            isAvailable = !userService.checkUserAvailability(type, value);
+        } catch (IllegalArgumentException ex) {
+            LOGGER.warn(ex);
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok(new Properties() {
+            {
+                setProperty("isAvailable", isAvailable.toString());
+            }
+        });
     }
 
 }
