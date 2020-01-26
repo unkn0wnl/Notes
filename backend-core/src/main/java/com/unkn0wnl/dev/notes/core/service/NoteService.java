@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface NoteService {
 
-    Note saveNote(String heading, String text);
+    Note saveNote(String heading, String text, String username);
 
     List<Note> getAll();
 
