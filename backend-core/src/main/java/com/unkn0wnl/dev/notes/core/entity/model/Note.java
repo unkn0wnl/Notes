@@ -22,7 +22,8 @@ public class Note extends DateAudit {
             cascade = {
                     CascadeType.MERGE,
                     CascadeType.PERSIST
-            })
+            }
+    )
     @JoinColumn(name = "user_id", nullable = false)
     private User author;
 
