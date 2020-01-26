@@ -48,18 +48,17 @@ public class RestUserService implements UserService {
     }
 
     @Override
-    public boolean checkUserAvailability(String checkBy, String value) {
+    public boolean checkUserAvailability(String checkByType, String value) {
         boolean result = true;
-        String normalizedCheckBy = checkBy.trim().toLowerCase();
+        String normalizedCheckBy = checkByType.trim().toLowerCase();
 
         if (normalizedCheckBy.equals("username")) {
-            userRepository.existsByUsername(value);
+            result = userRepository.existsByUsername(value);
         } else if (normalizedCheckBy.equals("email")) {
-            userRepository.existsByEmail(value);
+            result = userRepository.existsByEmail(value);
         } else {
-            result = false;
+            throw new IllegalArgumentException("Invalid checkByType parameter. " + checkByType);
         }
-
         return result;
     }
 

@@ -17,6 +17,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 public abstract class WebIntegrationTestConfigurer {
 
+    protected static Level loggerLevel = Level.INFO;
     protected final Logger logger;
     protected MockMvc mockMvc;
 
@@ -24,7 +25,7 @@ public abstract class WebIntegrationTestConfigurer {
     private WebApplicationContext webApplicationContext;
 
     {
-        Configurator.setRootLevel(Level.DEBUG);
+        Configurator.setRootLevel(loggerLevel);
         logger = getLogger(getClass());
     }
 

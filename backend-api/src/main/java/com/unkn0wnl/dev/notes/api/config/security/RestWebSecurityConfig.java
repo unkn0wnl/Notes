@@ -29,17 +29,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 )
 public class RestWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
     private UserDetailsService userDetailsService;
-    @Autowired
     private RestJwtAuthenticationEntryPoint unauthorizedHandler;
 
-    public RestWebSecurityConfig() {
-        super();
-    }
-
-    public RestWebSecurityConfig(boolean disableDefaults) {
-        super(disableDefaults);
+    @Autowired
+    public RestWebSecurityConfig(UserDetailsService userDetailsService, RestJwtAuthenticationEntryPoint unauthorizedHandler) {
+        this.userDetailsService = userDetailsService;
+        this.unauthorizedHandler = unauthorizedHandler;
     }
 
     @Override
@@ -66,6 +62,8 @@ public class RestWebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.js")
                     .permitAll()
                 .antMatchers("/api/auth/**")
+                    .permitAll()
+                .antMatchers(HttpMethod.GET,"/api/user/isAvailable")
                     .permitAll()
                 .antMatchers(HttpMethod.GET, "/api/users/**")
                     .permitAll()
@@ -101,4 +99,5 @@ public class RestWebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

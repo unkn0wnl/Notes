@@ -1,10 +1,7 @@
 package config;
 
 import com.unkn0wnl.dev.notes.api.config.security.RestWebSecurityConfig;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -20,12 +17,12 @@ import javax.transaction.Transactional;
 import java.util.Properties;
 
 @Configuration
+@Profile("test")
 @EnableWebMvc
 @Import(RestWebSecurityConfig.class)
 @Transactional
 @ComponentScan(basePackages = {"com.unkn0wnl.dev.notes.api", "com.unkn0wnl.dev.notes.core"})
 @EnableJpaRepositories("com.unkn0wnl.dev.notes.core.repository")
-//@EnableTransactionManagement
 public class ParentTestConfig {
 
     @Bean
