@@ -1,6 +1,8 @@
 package com.unkn0wnl.dev.notes.api.config.security;
 
+import com.unkn0wnl.dev.notes.api.config.application.RestJpaServiceApplicationContextConfig;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -8,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableWebMvc
+@Import(RestJpaServiceApplicationContextConfig.class)
 public class CorsWebMvcConfig extends WebMvcConfigurerAdapter {
 
     public static final long MAX_AGE_SECS = 3600;
