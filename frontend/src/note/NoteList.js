@@ -8,47 +8,73 @@ class NoteList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            polls: [],
+            notes: [],
             page: 0,
             size: 10,
             totalElements: 0,
             totalPages: 0,
             last: true,
-            currentVotes: [],
             isLoading: false
         };
-        // this.loadPollList = this.loadPollList.bind(this);
-        // this.handleLoadMore = this.handleLoadMore.bind(this);
+        this.loadNoteList = this.loadNoteList.bind(this);
+        this.handleLoadMore = this.handleLoadMore.bind(this);
     }
 
     componentDidMount() {
-        // this.loadPollList();
+        this.loadNoteList();
     }
 
     componentDidUpdate(nextProps) {
-        if(this.props.isAuthenticated !== nextProps.isAuthenticated) {
+        if (this.props.isAuthenticated !== nextProps.isAuthenticated) {
             // Reset State
             this.setState({
-                polls: [],
+                notes: [],
                 page: 0,
                 size: 10,
                 totalElements: 0,
                 totalPages: 0,
                 last: true,
-                currentVotes: [],
                 isLoading: false
             });
-            this.loadPollList();
+            this.loadNoteList();
         }
     }
 
-    handleLoadMore() {
-        this.loadPollList(this.state.page + 1);
+    loadNoteList(page = 0, size) {
+        let promise;
+
+        this.setState({
+            isLoading: true
+        });
+
+        promise
+            .then(response => {
+                const polls = this.state.polls.slice();
+
+                this.setState({
+                    notes: polls.concat(response.content),
+                    page: response.page,
+                    size: response.size,
+                    totalElements: response.totalElements,
+                    totalPages: response.totalPages,
+                    last: response.last,
+                    isLoading: false
+                })
+            }).catch(error => {
+            this.setState({
+                isLoading: false
+            })
+        });
+
     }
 
-    handleVoteChange(event, pollIndex) {
+    handleLoadMore() {
+        this.loadNoteList(this.state.page + 1);
+    }
+
+    handleNoteChange(event, noteIndex) {
         const currentVotes = this.state.currentVotes.slice();
-        currentVotes[pollIndex] = event.target.value;
+        currentVotes[noteIndex] = event.target.value;
 
         this.setState({
             currentVotes: currentVotes
@@ -56,13 +82,13 @@ class NoteList extends Component {
     }
 
 
-    handleVoteSubmit(event, pollIndex) {
+    handleNoteSubmit(event, pollIndex) {
         event.preventDefault();
-        if(!this.props.isAuthenticated) {
+        if (!this.props.isAuthenticated) {
             this.props.history.push("/login");
             notification.info({
                 message: 'Note',
-                description: "Please login to vote.",
+                description: "Please login to create Note.",
             });
             return;
         }
@@ -77,29 +103,36 @@ class NoteList extends Component {
     }
 
     render() {
-        const pollViews = [];
+        const noteViews = [];
+        this.state.notes.forEach((note, noteIndex) => {
+            noteViews.push(<Poll
+                key={note.id}
+                note={note}
+                handleVoteChange={(event) => this.handleNoteChange(event, noteIndex)}
+                handleVoteSubmit={(event) => this.handleNoteSubmit(event, noteIndex)}/>)
+        });
 
         return (
-            <div className="polls-container">
-                {pollViews}
+            <div className="note-container">
+                {noteViews}
                 {
                     !this.state.isLoading && this.state.polls.length === 0 ? (
-                        <div className="no-polls-found">
-                            <span>No Polls Found.</span>
+                        <div className="no-note-found">
+                            <span>No Notes Found.</span>
                         </div>
-                    ): null
+                    ) : null
                 }
                 {
                     !this.state.isLoading && !this.state.last ? (
-                        <div className="load-more-polls">
+                        <div className="load-more-notes">
                             <Button type="dashed" onClick={this.handleLoadMore} disabled={this.state.isLoading}>
-                                <Icon type="plus" /> Load more
+                                <Icon type="plus"/> Load more
                             </Button>
-                        </div>): null
+                        </div>) : null
                 }
                 {
                     this.state.isLoading ?
-                        <LoadingIndicator />: null
+                        <LoadingIndicator/> : null
                 }
             </div>
         );
