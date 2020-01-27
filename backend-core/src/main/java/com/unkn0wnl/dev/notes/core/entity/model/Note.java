@@ -1,5 +1,6 @@
 package com.unkn0wnl.dev.notes.core.entity.model;
 
+import com.unkn0wnl.dev.notes.core.entity.auditing.DateAudit;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -18,13 +19,9 @@ public class Note extends DateAudit {
     private String text;
 
     @ManyToOne(
-            fetch = FetchType.EAGER,
-            cascade = {
-                    CascadeType.MERGE,
-                    CascadeType.PERSIST
-            }
+            fetch = FetchType.EAGER
     )
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User author;
 
     public Note() {
