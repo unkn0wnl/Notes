@@ -1,4 +1,4 @@
-package com.unkn0wnl.dev.notes.core.entity.model;
+package com.unkn0wnl.dev.notes.core.entity.auditing;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
