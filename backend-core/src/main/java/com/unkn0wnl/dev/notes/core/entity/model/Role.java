@@ -1,6 +1,6 @@
 package com.unkn0wnl.dev.notes.core.entity.model;
 
-import com.unkn0wnl.dev.notes.core.entity.model.EntityConstantsHolder.RoleConstants;
+import com.unkn0wnl.dev.notes.core.entity.EntityConstantsHolder.RoleConstants;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
