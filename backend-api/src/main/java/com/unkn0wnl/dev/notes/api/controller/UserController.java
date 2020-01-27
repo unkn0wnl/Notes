@@ -1,6 +1,10 @@
 package com.unkn0wnl.dev.notes.api.controller;
 
 import com.unkn0wnl.dev.notes.api.exception.BadRequestException;
+import com.unkn0wnl.dev.notes.api.exception.ResourceNotFoundException;
+import com.unkn0wnl.dev.notes.api.payload.UserProfile;
+import com.unkn0wnl.dev.notes.core.entity.model.User;
+import com.unkn0wnl.dev.notes.core.repository.UserRepository;
 import com.unkn0wnl.dev.notes.core.service.UserService;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +30,12 @@ public class UserController {
     }
 
     private UserService userService;
+    private UserRepository userRepository;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @PreAuthorize("hasRole('USER')")
@@ -55,6 +61,14 @@ public class UserController {
                 setProperty("isAvailable", isAvailable.toString());
             }
         });
+    }
+
+    @RequestMapping(value = "/users/{username}", method = RequestMethod.GET)
+    public UserProfile getUserProfile(@PathVariable String username) {
+        User user = userRepository.findUserByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("user", "username", username));
+        long userNoteCount = user.getNotes().size();
+        return new UserProfile(user.getId(), user.getName(), user.getUsername(), user.getCreateAt(), userNoteCount);
     }
 
 }

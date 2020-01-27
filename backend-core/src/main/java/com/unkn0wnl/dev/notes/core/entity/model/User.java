@@ -1,6 +1,7 @@
 package com.unkn0wnl.dev.notes.core.entity.model;
 
-import com.unkn0wnl.dev.notes.core.entity.model.EntityConstantsHolder.UserConstants;
+import com.unkn0wnl.dev.notes.core.entity.EntityConstantsHolder.UserConstants;
+import com.unkn0wnl.dev.notes.core.entity.auditing.DateAudit;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -51,7 +52,9 @@ public class User extends DateAudit {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "author")
+    @OneToMany(fetch = FetchType.EAGER,
+            mappedBy = "author"
+    )
     private List<Note> notes;
 
     {

@@ -12,4 +12,6 @@ public interface NoteService {
 
     List<Note> getAll();
 
+    Note getNoteById(Long noteId);
+
 }
