@@ -1,5 +1,6 @@
 package com.unkn0wnl.dev.notes.core.entity.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.unkn0wnl.dev.notes.core.entity.auditing.DateAudit;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -18,6 +19,7 @@ public class Note extends DateAudit {
     @NotBlank
     private String text;
 
+    @JsonIgnore
     @ManyToOne(
             fetch = FetchType.EAGER
     )
