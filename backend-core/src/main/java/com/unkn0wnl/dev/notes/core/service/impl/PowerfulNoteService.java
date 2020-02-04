@@ -44,8 +44,8 @@ public class PowerfulNoteService implements NoteService {
     }
 
     @Override
-    public List<Note> getAll() {
-        return noteRepository.findAll();
+    public List<Note> getAll(Long userId) {
+        return noteRepository.findNoteByUserId(userId);
     }
 
     @Override
