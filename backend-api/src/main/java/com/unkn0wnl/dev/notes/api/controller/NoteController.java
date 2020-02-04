@@ -2,7 +2,9 @@ package com.unkn0wnl.dev.notes.api.controller;
 
 import com.unkn0wnl.dev.notes.api.payload.request.NoteRequest;
 import com.unkn0wnl.dev.notes.api.payload.response.ApiResponse;
+import com.unkn0wnl.dev.notes.api.security.principal.UserPrincipal;
 import com.unkn0wnl.dev.notes.core.entity.model.Note;
+import com.unkn0wnl.dev.notes.core.repository.UserRepository;
 import com.unkn0wnl.dev.notes.core.service.NoteService;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +33,18 @@ public class NoteController {
     }
 
     private NoteService noteService;
+    private UserRepository userRepository;
 
     @Autowired
-    public NoteController(NoteService noteService) {
+    public NoteController(NoteService noteService, UserRepository userRepository) {
         this.noteService = noteService;
+        this.userRepository = userRepository;
     }
 
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/notes", method = RequestMethod.GET)
-    public List<Note> getNotes() {
-        return noteService.getAll();
+    public List<Note> getNotes(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        return noteService.getAll(userPrincipal.getId());
     }
 
     @PreAuthorize("hasRole('USER')")
