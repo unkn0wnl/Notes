@@ -10,7 +10,7 @@ public interface NoteService {
 
     Note saveNote(String heading, String text, String username);
 
-    List<Note> getAll();
+    List<Note> getAll(Long userId);
 
     Note getNoteById(Long noteId);
 
