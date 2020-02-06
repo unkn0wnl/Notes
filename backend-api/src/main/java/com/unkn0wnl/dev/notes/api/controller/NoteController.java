@@ -4,7 +4,6 @@ import com.unkn0wnl.dev.notes.api.payload.request.NoteRequest;
 import com.unkn0wnl.dev.notes.api.payload.response.ApiResponse;
 import com.unkn0wnl.dev.notes.api.security.principal.UserPrincipal;
 import com.unkn0wnl.dev.notes.core.entity.model.Note;
-import com.unkn0wnl.dev.notes.core.repository.UserRepository;
 import com.unkn0wnl.dev.notes.core.service.NoteService;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +32,10 @@ public class NoteController {
     }
 
     private NoteService noteService;
-    private UserRepository userRepository;
 
     @Autowired
-    public NoteController(NoteService noteService, UserRepository userRepository) {
+    public NoteController(NoteService noteService) {
         this.noteService = noteService;
-        this.userRepository = userRepository;
     }
 
     @PreAuthorize("hasRole('USER')")
@@ -49,7 +46,8 @@ public class NoteController {
 
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/notes", method = RequestMethod.POST)
-    public ResponseEntity<?> createNote(@Valid @RequestBody NoteRequest noteRequest, @AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<?> createNote(@Valid @RequestBody NoteRequest noteRequest,
+                                        @AuthenticationPrincipal UserDetails userDetails) {
         Note savedNote = noteService.saveNote(noteRequest.getHeading(), noteRequest.getText(), userDetails.getUsername());
         URI savedNoteLocation = ServletUriComponentsBuilder
                 .fromCurrentRequest()
