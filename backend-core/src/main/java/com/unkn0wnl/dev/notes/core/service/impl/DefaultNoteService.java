@@ -15,19 +15,19 @@ import java.util.List;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 @Service
-public class PowerfulNoteService implements NoteService {
+public class DefaultNoteService implements NoteService {
 
     private static final Logger LOGGER;
 
     static {
-        LOGGER = getLogger(PowerfulNoteService.class);
+        LOGGER = getLogger(DefaultNoteService.class);
     }
 
     private NoteRepository noteRepository;
     private UserRepository userRepository;
 
     @Autowired
-    public PowerfulNoteService(NoteRepository noteRepository, UserRepository userRepository) {
+    public DefaultNoteService(NoteRepository noteRepository, UserRepository userRepository) {
         this.noteRepository = noteRepository;
         this.userRepository = userRepository;
     }
@@ -52,4 +52,5 @@ public class PowerfulNoteService implements NoteService {
     public Note getNoteById(Long noteId) {
         return noteRepository.getOne(noteId);
     }
+
 }

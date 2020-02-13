@@ -38,7 +38,7 @@
 
         <junit.jupiter.version>5.5.2</junit.jupiter.version>
         <junit.platform.version>1.5.2</junit.platform.version>
-        <org.mockito.core.version>${mockito-junit-jupiter.version}</org.mockito.core.version>
+        <org.mockito.core.version>2.23.4</org.mockito.core.version>
         <mockito-junit-jupiter.version>3.2.4</mockito-junit-jupiter.version>
 
         <tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
