@@ -19,11 +19,11 @@ import java.time.Instant;
 )
 public abstract class DateAudit implements Serializable {
 
-    @CreatedDate
+    @LastModifiedDate
     @Column(name = "update_at", nullable = false, updatable = false)
     private Instant updateAt;
 
-    @LastModifiedDate
+    @CreatedDate
     @Column(name = "create_at", nullable = false)
     private Instant createAt;
 
