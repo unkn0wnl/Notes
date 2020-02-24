@@ -1,6 +1,6 @@
 package com.unkn0wnl.dev.notes.core.service;
 
-import com.unkn0wnl.dev.notes.core.entity.model.Note;
+import com.unkn0wnl.dev.notes.core.dto.NoteDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,10 +8,10 @@ import java.util.List;
 @Service
 public interface NoteService {
 
-    Note saveNote(String heading, String text, String username);
+    NoteDto saveNote(String heading, String text, String username);
 
-    List<Note> getAll(Long userId);
+    List<NoteDto> getAll(Long userId);
 
-    Note getNoteById(Long noteId);
+    NoteDto getNoteById(Long noteId);
 
 }

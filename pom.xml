@@ -47,6 +47,7 @@
         <deployment.path>/</deployment.path>
         <deployment.port>5000</deployment.port>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <mapstruct.version>1.3.0.Final</mapstruct.version>
     </properties>
 
     <dependencyManagement>
@@ -178,6 +179,20 @@
                 <artifactId>hibernate-validator</artifactId>
                 <version>${org.hibernate-validator.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+                <!-- IntelliJ does not pick up the processor if it is not in the dependencies.
+                 There is already an open issue for IntelliJ see https://youtrack.jetbrains.com/issue/IDEA-150621
+                -->
+                <scope>provided</scope>
+            </dependency>
 
             <dependency>
                 <groupId>postgresql</groupId>
@@ -274,6 +289,13 @@
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
