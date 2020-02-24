@@ -3,7 +3,7 @@ package com.unkn0wnl.dev.notes.api.controller;
 import com.unkn0wnl.dev.notes.api.payload.request.NoteRequest;
 import com.unkn0wnl.dev.notes.api.payload.response.ApiResponse;
 import com.unkn0wnl.dev.notes.api.security.principal.UserPrincipal;
-import com.unkn0wnl.dev.notes.core.entity.model.Note;
+import com.unkn0wnl.dev.notes.core.dto.NoteDto;
 import com.unkn0wnl.dev.notes.core.service.NoteService;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class NoteController {
 
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/notes", method = RequestMethod.GET)
-    public List<Note> getNotes(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+    public List<NoteDto> getNotes(@AuthenticationPrincipal UserPrincipal userPrincipal) {
         return noteService.getAll(userPrincipal.getId());
     }
 
@@ -48,7 +48,7 @@ public class NoteController {
     @RequestMapping(value = "/notes", method = RequestMethod.POST)
     public ResponseEntity<?> createNote(@Valid @RequestBody NoteRequest noteRequest,
                                         @AuthenticationPrincipal UserDetails userDetails) {
-        Note savedNote = noteService.saveNote(noteRequest.getHeading(), noteRequest.getText(), userDetails.getUsername());
+        NoteDto savedNote = noteService.saveNote(noteRequest.getHeading(), noteRequest.getText(), userDetails.getUsername());
         URI savedNoteLocation = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{newNoteId}")
@@ -59,7 +59,7 @@ public class NoteController {
     }
 
     @RequestMapping(value = "/note/{noteId}")
-    public Note getNoteById(@PathVariable Long noteId) {
+    public NoteDto getNoteById(@PathVariable Long noteId) {
         return noteService.getNoteById(noteId);
     }
 
