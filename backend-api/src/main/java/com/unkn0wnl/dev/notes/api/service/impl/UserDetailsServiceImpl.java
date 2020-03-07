@@ -54,4 +54,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         new SimpleGrantedAuthority(role.getName().name())
                 ).collect(Collectors.toSet());
     }
+
 }
