@@ -34,7 +34,7 @@
         <jjwt.version>0.9.1</jjwt.version>
         <jackson.version>2.9.8</jackson.version>
 
-        <org.apache.logging.log4j.version>2.7</org.apache.logging.log4j.version>
+        <org.apache.logging.log4j.version>2.13.3</org.apache.logging.log4j.version>
 
         <junit.jupiter.version>5.5.2</junit.jupiter.version>
         <junit.platform.version>1.5.2</junit.platform.version>
