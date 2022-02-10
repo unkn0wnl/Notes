@@ -26,7 +26,7 @@
         <org.springframework.security.version>4.2.2.RELEASE</org.springframework.security.version>
         <org.springdata.version>1.11.16.RELEASE</org.springdata.version>
         <org.springdata-rest.version>2.6.16.RELEASE</org.springdata-rest.version>
-        <org.hibernate.version>5.2.10.Final</org.hibernate.version>
+        <org.hibernate.version>5.4.24.Final</org.hibernate.version>
         <org.hibernate-validator.version>5.4.1.Final</org.hibernate-validator.version>
 
         <javax.servlet.version>3.1.0</javax.servlet.version>
