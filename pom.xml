@@ -22,7 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <org.springframework.version>4.3.20.RELEASE</org.springframework.version>
+        <org.springframework.version>5.3.19</org.springframework.version>
         <org.springframework.security.version>4.2.2.RELEASE</org.springframework.security.version>
         <org.springdata.version>1.11.16.RELEASE</org.springdata.version>
         <org.springdata-rest.version>2.6.16.RELEASE</org.springdata-rest.version>
